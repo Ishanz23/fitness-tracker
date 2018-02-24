@@ -1,0 +1,19 @@
+<section class="signup-form">
+  <form fxLayout="column" fxLayoutAlign="center center" (ngSubmit)="onRegister(f)" #f="ngForm">
+    <mat-form-field>
+      <input type="email" name="email" placeholder="Your Email" matInput ngModel email required #emailInput="ngModel">
+      <mat-error *ngIf="emailInput.hasError('required')">Email is required!</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">Not a valid email!</mat-error>
+    </mat-form-field>
+    <mat-form-field hintLabel="Should be atleast 6 characters long">
+      <input type="password" name="password" placeholder="Your Password" matInput ngModel required minlength="6" #pwInput="ngModel">
+      <mat-hint align="end">{{pwInput.value?.length}}/6</mat-hint>
+    </mat-form-field>
+    <mat-form-field hintLabel="Must be atleast 18 years Old">
+      <input matInput [matDatepicker]="picker" placeholder="Your birthdate" [max]="maxDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Register</button>
+  </form>
+</section>
