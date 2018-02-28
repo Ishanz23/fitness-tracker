@@ -8,7 +8,7 @@ const trainingRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(trainingRoutes)
+        RouterModule.forChild(trainingRoutes)
     ],
     exports: [
         RouterModule
