@@ -6,6 +6,7 @@ import { CurrentTrainingComponent } from './current-training/current-training.co
 import { TrainingComponent } from './training.component';
 import { TrainingRoutingModule } from './training-routing.module';
 import { NewTrainingComponent } from './new-training/new-training.component';
+import { StopTrainingComponent } from './current-training/stop-training/stop-training.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { NewTrainingComponent } from './new-training/new-training.component';
         TrainingComponent,
         CurrentTrainingComponent,
         PastTrainingsComponent,
-        NewTrainingComponent
+        NewTrainingComponent,
+        StopTrainingComponent
     ],
     imports: [
         CommonModule,
@@ -25,7 +27,9 @@ import { NewTrainingComponent } from './new-training/new-training.component';
         TrainingComponent,
         CurrentTrainingComponent,
         PastTrainingsComponent,
-        NewTrainingComponent
-    ]
+        NewTrainingComponent,
+        StopTrainingComponent
+    ],
+    entryComponents: [StopTrainingComponent]
 })
 export class TrainingModule { }

@@ -4,6 +4,7 @@ import { MaterialModule } from '../shared/material.module';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -13,6 +14,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     ],
     imports: [
         CommonModule,
+        RouterModule,
         MaterialModule
     ],
     exports: [

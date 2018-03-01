@@ -11,12 +11,17 @@ import {
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCardModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    MatDialogModule
 } from '@angular/material';
 
 @NgModule({
     imports: [
         FlexLayoutModule,
+        MatCardModule,
         MatSidenavModule,
         MatButtonModule,
         MatIconModule,
@@ -25,12 +30,16 @@ import {
         MatListModule,
         MatFormFieldModule,
         MatInputModule,
+        MatSelectModule,
         MatCheckboxModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatProgressSpinnerModule,
+        MatDialogModule
     ],
     exports: [
         FlexLayoutModule,
+        MatCardModule,
         MatSidenavModule,
         MatButtonModule,
         MatIconModule,
@@ -39,9 +48,12 @@ import {
         MatListModule,
         MatFormFieldModule,
         MatInputModule,
+        MatSelectModule,
         MatCheckboxModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatProgressSpinnerModule,
+        MatDialogModule
     ]
 })
 export class MaterialModule {
