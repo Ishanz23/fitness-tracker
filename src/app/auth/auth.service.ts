@@ -41,4 +41,8 @@ export class AuthService {
     this.router.navigate(['/training']);
   }
 
+  isAuth() {
+    return this.user !== undefined;
+  }
+
 }

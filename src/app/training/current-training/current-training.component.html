@@ -1,6 +1,7 @@
 <section class="current-training" fxLayout="column" fxLayoutAlign="center center">
+  <h1>{{ currentExercise.name }}</h1>
   <mat-progress-spinner mode="determinate" [value]="progress"></mat-progress-spinner>
-  <h1>{{ progress }}%</h1>
+  <h2> {{ progress }}%</h2>
   <p *ngIf="progress < 100">Keep Going! You can do it!</p>
   <p *ngIf="progress > 99">Great Job!</p>
   <div class="button-row">

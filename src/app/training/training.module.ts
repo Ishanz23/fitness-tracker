@@ -7,6 +7,7 @@ import { TrainingComponent } from './training.component';
 import { TrainingRoutingModule } from './training-routing.module';
 import { NewTrainingComponent } from './new-training/new-training.component';
 import { StopTrainingComponent } from './current-training/stop-training/stop-training.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { StopTrainingComponent } from './current-training/stop-training/stop-tra
     ],
     imports: [
         CommonModule,
+        FormsModule,
         MaterialModule,
         TrainingRoutingModule
     ],

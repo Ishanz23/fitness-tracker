@@ -9,6 +9,7 @@ import { MaterialModule } from './shared/material.module';
 
 import { AppComponent } from './app.component';
 import { AuthService } from './auth/auth.service';
+import { TrainingService } from './training/training.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { AuthService } from './auth/auth.service';
     AuthModule,
     TrainingModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, TrainingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
