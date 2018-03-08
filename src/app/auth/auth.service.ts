@@ -29,7 +29,7 @@ export class AuthService {
         this.trainingSvc.cancelSubscription();
         this.isAuth = false;
         this.authChanged.next(false);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       }
     });
   }

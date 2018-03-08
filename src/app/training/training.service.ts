@@ -21,20 +21,24 @@ export class TrainingService {
         this.uiSvc.loadingStateChanged.next(true);
         this.fbSubs.push(
             this.db.collection('availableExcercises').snapshotChanges()
-            .map(docs => {
-                return docs.map(doc => {
-                    return {
-                        id: doc.payload.doc.id,
-                        name: doc.payload.doc.data().name,
-                        duration: doc.payload.doc.data().duration,
-                        calories: doc.payload.doc.data().calories
-                    };
-                });
-            }).subscribe((exercises: Exercise[]) => {
-                this.availableExercises = exercises;
-                this.uiSvc.loadingStateChanged.next(false);
-                this.exercisesChanged$.next(exercises);
-            })
+                .map(docs => {
+                    return docs.map(doc => {
+                        return {
+                            id: doc.payload.doc.id,
+                            name: doc.payload.doc.data().name,
+                            duration: doc.payload.doc.data().duration,
+                            calories: doc.payload.doc.data().calories
+                        };
+                    });
+                }).subscribe((exercises: Exercise[]) => {
+                    this.availableExercises = exercises;
+                    this.uiSvc.loadingStateChanged.next(false);
+                    this.exercisesChanged$.next(exercises);
+                }, error => {
+                    this.uiSvc.showSnackBar('Failed To load Exercises! Try again later.', null, 4000);
+                    this.uiSvc.loadingStateChanged.next(false);
+                    this.exercisesChanged$.next(null);
+                })
         );
     }
 

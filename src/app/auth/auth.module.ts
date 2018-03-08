@@ -5,6 +5,8 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
     declarations: [
@@ -12,11 +14,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         LoginComponent
     ],
     imports: [
-        CommonModule,
-        FormsModule,
+        SharedModule,
         ReactiveFormsModule,
-        MaterialModule,
-        AuthRoutingModule
+        AuthRoutingModule,
+        AngularFireAuthModule
     ],
     exports: [
         AuthRoutingModule,
