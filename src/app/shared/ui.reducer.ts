@@ -4,8 +4,8 @@ export interface State {
     isLoading: boolean;
 }
 
-const initialState = {
-    isloading: false
+const initialState: State = {
+    isLoading: false
 };
 
 export function uiReducer(state = initialState, action: UIActions) {
@@ -16,7 +16,7 @@ export function uiReducer(state = initialState, action: UIActions) {
             };
         case STOP_LOADING:
             return {
-                isloading: false
+                isLoading: false
             };
         default:
             return state;

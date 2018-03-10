@@ -39,7 +39,6 @@ export class AuthService {
   }
   registerUser(authData: AuthData) {
     // this.uiSvc.loadingStateChanged.next(true);
-
     this.store.dispatch(new UI.StartLoading());
     this.afAuth.auth.createUserWithEmailAndPassword(authData.email, authData.password)
       .then(response => {
@@ -56,10 +55,10 @@ export class AuthService {
 
   loginUser(authData: AuthData) {
     // this.uiSvc.loadingStateChanged.next(true);
-    this.store.dispatch({type: 'START_LOADING'});
+    this.store.dispatch(new UI.StartLoading());
     this.afAuth.auth.signInWithEmailAndPassword(authData.email, authData.password)
       .then(response => {
-        this.uiSvc.loadingStateChanged.next(false);
+        // this.uiSvc.loadingStateChanged.next(false);
         this.store.dispatch(new UI.StopLoading());
         this.uiSvc.showSnackBar('Login Successful!', null, 3000);
       })
