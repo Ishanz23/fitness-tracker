@@ -7,6 +7,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { TrainingService } from '../training/training.service';
 import { MatSnackBar } from '@angular/material';
 import { UIService } from '../shared/ui.service';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../app.reducer';
+import * as UI from '../shared/ui.actions';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +20,8 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private trainingSvc: TrainingService,
     private uiSvc: UIService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private store: Store<fromRoot.State>) { }
 
   initAuthListener() {
     this.afAuth.authState.subscribe(user => {
@@ -34,27 +38,34 @@ export class AuthService {
     });
   }
   registerUser(authData: AuthData) {
-    this.uiSvc.loadingStateChanged.next(true);
+    // this.uiSvc.loadingStateChanged.next(true);
+
+    this.store.dispatch(new UI.StartLoading());
     this.afAuth.auth.createUserWithEmailAndPassword(authData.email, authData.password)
       .then(response => {
-        this.uiSvc.loadingStateChanged.next(false);
+        // this.uiSvc.loadingStateChanged.next(false);
+        this.store.dispatch(new UI.StopLoading());
         this.uiSvc.showSnackBar('Registration Successful!', null, 3000);
       })
       .catch(error => {
-        this.uiSvc.loadingStateChanged.next(false);
+        // this.uiSvc.loadingStateChanged.next(false);
+        this.store.dispatch(new UI.StopLoading());
         this.uiSvc.showSnackBar(error.message, null, 3000);
       });
   }
 
   loginUser(authData: AuthData) {
-    this.uiSvc.loadingStateChanged.next(true);
+    // this.uiSvc.loadingStateChanged.next(true);
+    this.store.dispatch({type: 'START_LOADING'});
     this.afAuth.auth.signInWithEmailAndPassword(authData.email, authData.password)
       .then(response => {
         this.uiSvc.loadingStateChanged.next(false);
+        this.store.dispatch(new UI.StopLoading());
         this.uiSvc.showSnackBar('Login Successful!', null, 3000);
       })
       .catch(error =>  {
-        this.uiSvc.loadingStateChanged.next(false);
+        // this.uiSvc.loadingStateChanged.next(false);
+        this.store.dispatch(new UI.StopLoading());
         this.uiSvc.showSnackBar(error.message, null, 3000);
       });
   }
