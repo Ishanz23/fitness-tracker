@@ -10,6 +10,7 @@ import { UIService } from '../shared/ui.service';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../app.reducer';
 import * as UI from '../shared/ui.actions';
+import * as Auth from './auth.actions';
 
 @Injectable()
 export class AuthService {
@@ -27,12 +28,12 @@ export class AuthService {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.isAuth = true;
-        this.authChanged.next(true);
+        this.store.dispatch(new Auth.SetAuthenticated());
         this.router.navigate(['/training']);
       } else {
         this.trainingSvc.cancelSubscription();
         this.isAuth = false;
-        this.authChanged.next(false);
+        this.store.dispatch(new Auth.SetUnauthenticated());
         this.router.navigate(['/']);
       }
     });
