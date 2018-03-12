@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Subscription } from 'rxjs/Subscription';
 import { UIService } from '../shared/ui.service';
+import { Store } from '@ngrx/store';
+import * as UI from '../shared/ui.actions';
+import * as fromRoot from '../app.reducer';
 
 @Injectable()
 export class TrainingService {
@@ -15,10 +18,13 @@ export class TrainingService {
     public pastExercisesChanged$ = new Subject<Exercise[]>();
     private fbSubs: Subscription[] = [];
 
-    constructor(private db: AngularFirestore, private uiSvc: UIService) { }
+    constructor(private db: AngularFirestore,
+        private store: Store<fromRoot.State>,
+        private uiSvc: UIService) { }
 
     fetchAvailableExercises() {
-        this.uiSvc.loadingStateChanged.next(true);
+        this.store.dispatch(new UI.StartLoading());
+        // this.uiSvc.loadingStateChanged.next(true);
         this.fbSubs.push(
             this.db.collection('availableExcercises').snapshotChanges()
                 .map(docs => {
@@ -31,12 +37,14 @@ export class TrainingService {
                         };
                     });
                 }).subscribe((exercises: Exercise[]) => {
+                    this.store.dispatch(new UI.StopLoading());
                     this.availableExercises = exercises;
-                    this.uiSvc.loadingStateChanged.next(false);
+                    // this.uiSvc.loadingStateChanged.next(false);
                     this.exercisesChanged$.next(exercises);
                 }, error => {
+                    this.store.dispatch(new UI.StopLoading());
                     this.uiSvc.showSnackBar('Failed To load Exercises! Try again later.', null, 4000);
-                    this.uiSvc.loadingStateChanged.next(false);
+                    // this.uiSvc.loadingStateChanged.next(false);
                     this.exercisesChanged$.next(null);
                 })
         );

@@ -2,10 +2,10 @@
   <form (ngSubmit)="onStartTraining(f)" #f="ngForm">
     <mat-card fxFlex.xs="100%" fxFlex="400px">
       <mat-card-title fxLayoutAlign="center">
-        <span *ngIf="!isLoading && exercises">Time to start a workout!</span>
-        <span *ngIf="!isLoading && !exercises">Aww Crap!</span>
+        <span *ngIf="!(isLoading$ | async) && exercises">Time to start a workout!</span>
+        <span *ngIf="!(isLoading$ | async) && !exercises">Aww Crap!</span>
       </mat-card-title>
-      <mat-card-content *ngIf="!isLoading && exercises" fxLayoutAlign="center">
+      <mat-card-content *ngIf="!(isLoading$ | async) && exercises" fxLayoutAlign="center">
         <mat-form-field>
           <mat-select name="selectedExerciseId" placeholder="Select an Exercise" ngModel required>
             <mat-option *ngFor="let exercise of exercises" [value]="exercise.id">{{ exercise.name }}</mat-option>
@@ -13,11 +13,11 @@
           <mat-error *ngIf="f.invalid">Please choose an exercise!</mat-error>
         </mat-form-field>
       </mat-card-content>
-      <mat-card-actions *ngIf="!isLoading" fxLayoutAlign="center">
+      <mat-card-actions *ngIf="!(isLoading$ | async)" fxLayoutAlign="center">
         <button mat-raised-button color="primary" [disabled]="f.invalid" *ngIf="exercises">START</button>
         <button mat-raised-button color="accent" (click)="fetchExercises()" *ngIf="!exercises">Try Again</button>
       </mat-card-actions>
-      <mat-card-content *ngIf="isLoading" fxLayoutAlign="center">
+      <mat-card-content *ngIf="isLoading$ | async" fxLayoutAlign="center">
         <mat-spinner></mat-spinner>
       </mat-card-content>
     </mat-card>
