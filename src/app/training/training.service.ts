@@ -1,5 +1,4 @@
 import { Exercise } from './exercise.model';
-import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Subscription } from 'rxjs/Subscription';

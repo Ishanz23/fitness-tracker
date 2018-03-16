@@ -13,15 +13,12 @@ import * as fromRoot from '../../app.reducer';
 export class SignupComponent implements OnInit {
   maxDate: Date;
   isLoading$: Observable<boolean>;
-  // loadingSub: Subscription;
 
   constructor(private authService: AuthService,
-    // private uiSvc: UIService,
     private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
-    // this.loadingSub = this.uiSvc.loadingStateChanged.subscribe(loading => this.isLoading = loading);
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
   }

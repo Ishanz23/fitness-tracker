@@ -13,10 +13,8 @@ import * as fromRoot from '../../app.reducer';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isLoading$: Observable<boolean>;
-  // loadingSub: Subscription;
 
   constructor(private authService: AuthService,
-    //  private uiSvc: UIService,
      private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
